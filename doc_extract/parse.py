@@ -1,5 +1,9 @@
 import ast
-from pathlib import Path
+from doc_extract.utils import (
+    get_python_sources_in_directory,
+    get_python_module_name_form_path,
+)
+
 
 class ParsedObject(object):
     def __init__(self, node):
@@ -16,7 +20,7 @@ class ParsedObject(object):
 class ParsedModule(ParsedObject):
     def __init__(self, node, path):
         super().__init__(node)
-        self.name = "Module"
+        self.name = get_python_module_name_form_path(str(path))
         self.path = path
 
     def __str__(self):
@@ -97,8 +101,20 @@ class LibraryStructure(object):
         ]
 
     def parse_module(self, module_path):
-        module_structure = analyse_module_path(module_path)
-        return module_structure
+        with open(module_path) as fp:
+            code = ast.parse(fp.read())
+
+        structure = ModuleStructure(module_path)
+
+        for node in ast.walk(code):
+            if isinstance(node, ast.Module):
+                structure.parse_module(node)
+            elif isinstance(node, ast.ClassDef):
+                structure.parse_class(node)
+            elif isinstance(node, ast.FunctionDef):
+                structure.parse_function(node)
+
+        return structure
 
     def serialize(self):
         return {
@@ -108,24 +124,3 @@ class LibraryStructure(object):
                 for module_structure in self.modules
             ]
         }
-
-def get_python_sources_in_directory(directory):
-    result = list(Path(directory).rglob("*.py"))
-    return result
-
-
-def analyse_module_path(module_path):
-    with open(module_path) as fp:
-        code = ast.parse(fp.read())
-
-    structure = ModuleStructure(module_path)
-
-    for node in ast.walk(code):
-        if isinstance(node, ast.Module):
-            structure.parse_module(node)
-        elif isinstance(node, ast.ClassDef):
-            structure.parse_class(node)
-        elif isinstance(node, ast.FunctionDef):
-            structure.parse_function(node)
-
-    return structure
