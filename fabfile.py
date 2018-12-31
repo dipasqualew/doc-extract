@@ -28,7 +28,7 @@ def run_bandit():
     Run bandit
     """
     _print_block("Executing bandit")
-    local("bandit doc_extract")
+    local("bandit -r doc_extract -x doc_extract/tests")
 
 def run_pylint():
     """
