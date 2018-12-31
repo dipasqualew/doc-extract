@@ -1,2 +1,11 @@
+# Execution build files
 *.pyc
 __pycache__
+
+# Test build files
+public
+.pytest_cache
+.coverage
+
+# Virtual Env
+docextract-venv
