@@ -43,6 +43,21 @@ class ParsedObject(DocExtractAbstractClass):
         """
         return "Object: '{name}'".format(name=self.name)
 
+    def __eq__(self, other):
+        """
+        Checks whether two ParsedObjects are equal
+
+        Returns true when:
+        - The two objects are instances of the same class
+        - The two objects share the same node
+
+        :returns: bool
+        """
+        return (
+            self.__class__ == other.__class__ and
+            self.node == other.node
+        )
+
 class ParsedModule(ParsedObject):
     """
     ParsedModule information container

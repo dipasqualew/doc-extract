@@ -68,8 +68,8 @@ def create_node(node_type=None, **kwargs):
     if node_type is None:
         node_type = ast.FunctionDef
 
-    name = kwargs.get("name", "function_name")
-    body = kwargs.get("body", [])
+    name = kwargs.get("name", "node_name")
+    body = kwargs.get("body", ())
 
     node = node_type()
     setattr(node, "name", name)
