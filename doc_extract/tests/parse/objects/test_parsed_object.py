@@ -41,7 +41,7 @@ def test_repr(node_type):
     node = create_node(node_type=node_type)
     obj = ParsedObject(node)
     obj_repr = repr_should_be_defined(obj)
-    assert obj_repr == "<Object: Unknown type>"
+    assert obj_repr == "<Object: 'Unknown type'>"
 
 @pytest.mark.parametrize("node_type", NODE_TYPES)
 def test_str(node_type):
@@ -49,4 +49,4 @@ def test_str(node_type):
     node = create_node(node_type=node_type)
     obj = ParsedObject(node)
     obj_str = str_should_be_defined(obj)
-    assert obj_str == "Object: Unknown type"
+    assert obj_str == "Object: 'Unknown type'"

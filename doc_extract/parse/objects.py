@@ -41,7 +41,7 @@ class ParsedObject(DocExtractAbstractClass):
 
         :returns: str
         """
-        return "Object: {name}".format(name=self.name)
+        return "Object: '{name}'".format(name=self.name)
 
 class ParsedModule(ParsedObject):
     """
@@ -114,7 +114,7 @@ class ParsedClass(ParsedObject):
 
         :returns: str
         """
-        return "Class: {name}".format(name=self.name)
+        return "Class: '{name}'".format(name=self.name)
 
 class ParsedFunction(ParsedObject):
     """
@@ -136,4 +136,4 @@ class ParsedFunction(ParsedObject):
 
         :returns: str
         """
-        return "Function: {name}".format(name=self.name)
+        return "Function: '{name}'".format(name=self.name)

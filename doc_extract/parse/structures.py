@@ -2,6 +2,7 @@
 Defines classes that form structures
 of the parsed code information
 """
+import os
 import ast
 from doc_extract.generic import DocExtractAbstractClass
 from doc_extract.utils import (
@@ -33,6 +34,7 @@ class LibraryStructure(CodeStructure):
 
         :param library_path: str - Filepath to the root of the libraty
         """
+        library_path = os.path.abspath(library_path)
         self.library_name = get_python_name_from_path(library_path)
         self.library_path = library_path
         self.module_paths = get_python_sources_in_directory(self.library_path)
@@ -52,7 +54,7 @@ class LibraryStructure(CodeStructure):
         with open(module_path) as file_pointer:
             code = ast.parse(file_pointer.read())
 
-        structure = ModuleStructure(module_path)
+        structure = ModuleStructure(module_path.replace(self.library_path, self.library_name))
 
         for node in ast.walk(code):
             if isinstance(node, ast.Module):
@@ -84,7 +86,7 @@ class LibraryStructure(CodeStructure):
 
         :returns: str
         """
-        return "Library {name} at {path}".format(
+        return "Library '{name}' at '{path}'".format(
             name=self.library_name,
             path=self.library_path,
         )
@@ -165,6 +167,6 @@ class ModuleStructure(CodeStructure):
 
         :returns: str
         """
-        return "Module {name}'s structure".format(
+        return "Module '{name}' structure".format(
             name=self.name,
         )

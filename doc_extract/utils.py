@@ -13,7 +13,7 @@ def get_python_sources_in_directory(directory):
     :param directory: str
     :returns: List<pathlib.Path>
     """
-    result = list(Path(directory).rglob("*.py"))
+    result = [ str(path) for path in Path(directory).rglob("*.py") ]
     return result
 
 def get_python_module_name_from_path(path):
