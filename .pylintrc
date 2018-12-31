@@ -1,0 +1,3 @@
+[MASTER]
+disable=C0326,C0301,R0901,R0903,R0205
+output-format=colorized
