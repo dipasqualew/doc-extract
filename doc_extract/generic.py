@@ -8,9 +8,17 @@ class DocExtractAbstractClass(object):
     of the doc_extract library
     """
 
+    def __str__(self):
+        """
+        String representation of the instance
+
+        :returns: str
+        """
+        return self.__class__.__name__
+
     def __repr__(self):
         """
-        Representation of the instance
+        Canonical string representation of the instance
 
         :returns: str
         """

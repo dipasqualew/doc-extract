@@ -21,6 +21,7 @@ def run_pytest():
     """
     _print_block("Executing unit tests")
     local("coverage run --branch -m pytest")
+    generate_coverage_report()
 
 def run_bandit():
     """
@@ -54,6 +55,5 @@ def test():
     Runs the unit tests
     """
     run_pytest()
-    generate_coverage_report()
     run_bandit()
     run_pylint()
