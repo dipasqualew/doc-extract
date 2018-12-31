@@ -63,10 +63,47 @@ class TempDirectory(object):
         """
         shutil.rmtree(self.dir, ignore_errors=True)
 
+
+class RecursiveTempDirectory(object):
+    """
+    Recursively creates and deletes temp directories
+    """
+
+    def __init__(self, temp_dir_definitions):
+        """
+        Inits the context manager
+        """
+        self.definitions = temp_dir_definitions
+        self.temp_dir_managers = []
+
+    def __enter__(self):
+        """
+        Creates the directories and their files
+        """
+        parent_dir = None
+        temp_dir_refs = []
+
+        for definition in self.definitions:
+            definition["parent_dir"] = parent_dir
+            temp_dir_manager = TempDirectory(**definition)
+            temp_dir_ref = temp_dir_manager.__enter__()
+            parent_dir = temp_dir_ref[0]
+            temp_dir_refs.append(temp_dir_ref)
+            self.temp_dir_managers.append(temp_dir_manager)
+
+        return temp_dir_refs
+
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        """
+        Deletes the directories and their files
+        """
+        for manager in self.temp_dir_managers[::-1]:
+            manager.__exit__(exc_type, exc_value, exc_traceback)
+
 def create_node(node_type=None, **kwargs):
     """Creates an ast.Node"""
     if node_type is None:
-        node_type = ast.FunctionDef
+        node_type = ast.Expression
 
     name = kwargs.get("name", "node_name")
     body = kwargs.get("body", ())

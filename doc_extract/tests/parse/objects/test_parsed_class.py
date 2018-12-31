@@ -5,16 +5,9 @@ module: doc_extract.parse.objects
 import ast
 import pytest
 from doc_extract.tests.mixins import repr_should_be_defined, str_should_be_defined
-from doc_extract.tests.nodes import CLASS_NODES
+from doc_extract.tests.nodes import get_node_functions, CLASS_NODES
 from doc_extract.parse.objects import ParsedClass, ParsedFunction
 
-def get_node_functions(node):
-    """Returns the nodes that are functions in node.body"""
-    return [
-        child_node
-        for child_node in node.body
-        if isinstance(child_node, ast.FunctionDef)
-    ]
 
 @pytest.mark.parametrize("node", CLASS_NODES)
 def test_init(node):

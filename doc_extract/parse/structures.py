@@ -156,7 +156,7 @@ class ModuleStructure(CodeStructure):
         :returns: dict
         """
         return {
-            "module": self.module.serialize(),
+            "module": self.module.serialize() if self.module else None,
             "classes": [ parsed_class.serialize() for parsed_class in self.classes ],
             "functions": [ parsed_function.serialize() for parsed_function in self.functions ],
         }

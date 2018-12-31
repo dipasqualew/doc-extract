@@ -6,18 +6,12 @@ import ast
 import pytest
 from doc_extract.tests.mixins import repr_should_be_defined, str_should_be_defined
 from doc_extract.tests.nodes import MODULE_NODES
+from doc_extract.tests.paths import DEFAULT_NAME, DEFAULT_PATH, PATH_PREFIXES, PATH_MODULE_PAIRS
 from doc_extract.parse.objects import ParsedModule
 
-DEFAULT_PATH = "module1/module2/module3"
-DEFAULT_NAME = "module1.module2.module3"
 
-@pytest.mark.parametrize("path,name", (
-    ("__init__.py", "__init__"),
-    ("module.py", "module"),
-    ("module/__init__.py", "module.__init__"),
-    (DEFAULT_PATH, DEFAULT_NAME),
-))
-@pytest.mark.parametrize("path_prefix", ("", "/", "./", "../"))
+@pytest.mark.parametrize("path,name", PATH_MODULE_PAIRS)
+@pytest.mark.parametrize("path_prefix", PATH_PREFIXES)
 @pytest.mark.parametrize("node", MODULE_NODES)
 def test_init(node, path_prefix, path, name):
     """__init__ sets all the expected properties"""
