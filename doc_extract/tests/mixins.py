@@ -63,15 +63,16 @@ class TempDirectory(object):
         """
         shutil.rmtree(self.dir, ignore_errors=True)
 
-def create_node(node_type=None, body=None):
+def create_node(node_type=None, **kwargs):
     """Creates an ast.Node"""
     if node_type is None:
         node_type = ast.FunctionDef
 
-    if body is None:
-        body = []
+    name = kwargs.get("name", "function_name")
+    body = kwargs.get("body", [])
 
     node = node_type()
+    setattr(node, "name", name)
     setattr(node, "body", body)
 
     return node
