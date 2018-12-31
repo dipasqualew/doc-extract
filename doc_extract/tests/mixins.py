@@ -1,6 +1,7 @@
 """
 Shared tests
 """
+import ast
 import shutil
 import tempfile
 
@@ -62,6 +63,19 @@ class TempDirectory(object):
         """
         shutil.rmtree(self.dir, ignore_errors=True)
 
+def create_node(node_type=None, body=None):
+    """Creates an ast.Node"""
+    if node_type is None:
+        node_type = ast.FunctionDef
+
+    if body is None:
+        body = []
+
+    node = node_type()
+    setattr(node, "body", body)
+
+    return node
+
 def repr_should_be_defined(obj):
     """Checks the obj.__repr__() method is properly defined"""
     obj_repr = repr(obj)
@@ -71,6 +85,8 @@ def repr_should_be_defined(obj):
     assert obj_repr.startswith("<")
     assert obj_repr.endswith(">")
 
+    return obj_repr
+
 def str_should_be_defined(obj):
     """Checks the obj.__str__() method is property defined"""
     obj_str = str(obj)
@@ -78,3 +94,5 @@ def str_should_be_defined(obj):
     assert isinstance(obj_str, str)
     assert obj_str == obj.__str__()
     assert obj_str
+
+    return obj_str
