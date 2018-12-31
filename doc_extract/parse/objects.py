@@ -81,7 +81,7 @@ class ParsedModule(ParsedObject):
 
         :returns: str
         """
-        return "Module at <{path}>".format(path=self.path)
+        return "Module at: '{path}'".format(path=self.path)
 
 class ParsedClass(ParsedObject):
     """
