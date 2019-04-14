@@ -5,7 +5,7 @@ module: doc_extract.utils
 import os
 import pytest
 from doc_extract.tests.th.os import _get_os_specific_paths
-from doc_extract.tests.th.mixins import TempDirectory
+from doc_extract.tests.th.files import TempDirectory
 from doc_extract.utils import (
     get_python_sources_in_directory,
     get_python_module_name_from_path,

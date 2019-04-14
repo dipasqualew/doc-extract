@@ -2,6 +2,7 @@
 Tests for LibraryStructure
 module: doc_extract.parse.structures
 """
+from os.path import sep
 from unittest.mock import patch
 import pytest
 from doc_extract.parse.objects import ParsedModule, ParsedClass, ParsedFunction
@@ -31,7 +32,7 @@ def test_init(library_path, name):
         {
             "dir_suffix": path,
         }
-        for path in library_path.split("/")
+        for path in library_path.split(sep)
     ]
     with RecursiveTempDirectory(definitions) as refs:
         structure = LibraryStructure(refs[-1][0])
@@ -47,7 +48,7 @@ def test_repr(library_path):
         {
             "dir_suffix": path,
         }
-        for path in library_path.split("/")
+        for path in library_path.split(sep)
     ]
     with RecursiveTempDirectory(definitions) as refs:
         structure = LibraryStructure(refs[-1][0])
@@ -61,7 +62,7 @@ def test_str(library_path):
         {
             "dir_suffix": path,
         }
-        for path in library_path.split("/")
+        for path in library_path.split(sep)
     ]
     with RecursiveTempDirectory(definitions) as refs:
         structure = LibraryStructure(refs[-1][0])
