@@ -2,7 +2,7 @@
 Generates nodes to be used in tests
 """
 import ast
-from doc_extract.tests.mixins import create_node
+from doc_extract.tests.th.mixins import create_node
 
 
 # Typical node types

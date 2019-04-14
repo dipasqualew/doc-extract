@@ -2,8 +2,10 @@
 Tests the utils functions
 module: doc_extract.utils
 """
+import os
 import pytest
-from doc_extract.tests.mixins import TempDirectory
+from doc_extract.tests.th.os import _get_os_specific_paths
+from doc_extract.tests.th.mixins import TempDirectory
 from doc_extract.utils import (
     get_python_sources_in_directory,
     get_python_module_name_from_path,
@@ -81,34 +83,34 @@ def test_find_files_recursive(level_1_files, level_2_files, level_3_files, non_p
             with TempDirectory(parent_dir=refs2[0], file_suffixes=batch3):
                 do_find_files_and_assert(refs1[0], expected_files)
 
-@pytest.mark.parametrize("prefix", ("", "/", "./", "../"))
+@pytest.mark.parametrize("prefix", _get_os_specific_paths("", "/", "./", "../"))
 @pytest.mark.parametrize("path,expected_module_name", (
-    ("module.py", "module"),
-    ("underscored_module_name.py", "underscored_module_name"),
-    ("camelCasedModuleName.py", "camelCasedModuleName"),
-    ("PascalCasedModuleName.py", "PascalCasedModuleName"),
-    ("some/module.py", "some.module"),
-    ("__init__.py", "__init__"),
-    ("some/__init__.py", "some.__init__"),
-    ("three/level/module.py", "three.level.module"),
-    ("three/level/__init__.py", "three.level.__init__"),
+    _get_os_specific_paths("module.py", "module"),
+    _get_os_specific_paths("underscored_module_name.py", "underscored_module_name"),
+    _get_os_specific_paths("camelCasedModuleName.py", "camelCasedModuleName"),
+    _get_os_specific_paths("PascalCasedModuleName.py", "PascalCasedModuleName"),
+    _get_os_specific_paths("some/module.py", "some.module"),
+    _get_os_specific_paths("__init__.py", "__init__"),
+    _get_os_specific_paths("some/__init__.py", "some.__init__"),
+    _get_os_specific_paths("three/level/module.py", "three.level.module"),
+    _get_os_specific_paths("three/level/__init__.py", "three.level.__init__"),
 ))
 def test_get_python_module_name_from_path(path, expected_module_name, prefix):
     """The actual module name matches the expected module name"""
     actual_module_name = get_python_module_name_from_path(prefix + path)
     assert actual_module_name == expected_module_name
 
-@pytest.mark.parametrize("prefix", ("", "/", "./", "../"))
+@pytest.mark.parametrize("prefix", _get_os_specific_paths("", "/", "./", "../"))
 @pytest.mark.parametrize("path,expected_module_name", (
-    ("module.py", "module"),
-    ("underscored_module_name.py", "underscored_module_name"),
-    ("camelCasedModuleName.py", "camelCasedModuleName"),
-    ("PascalCasedModuleName.py", "PascalCasedModuleName"),
-    ("some/module.py", "module"),
-    ("__init__.py", "__init__"),
-    ("some/__init__.py", "__init__"),
-    ("three/level/module.py", "module"),
-    ("three/level/__init__.py", "__init__"),
+    _get_os_specific_paths("module.py", "module"),
+    _get_os_specific_paths("underscored_module_name.py", "underscored_module_name"),
+    _get_os_specific_paths("camelCasedModuleName.py", "camelCasedModuleName"),
+    _get_os_specific_paths("PascalCasedModuleName.py", "PascalCasedModuleName"),
+    _get_os_specific_paths("some/module.py", "module"),
+    _get_os_specific_paths("__init__.py", "__init__"),
+    _get_os_specific_paths("some/__init__.py", "__init__"),
+    _get_os_specific_paths("three/level/module.py", "module"),
+    _get_os_specific_paths("three/level/__init__.py", "__init__"),
 ))
 def test_get_python_name_from_path(path, expected_module_name, prefix):
     """The actual module name matches the expected module name"""

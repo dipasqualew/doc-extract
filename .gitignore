@@ -7,5 +7,6 @@ public
 .pytest_cache
 .coverage
 
-# Virtual Env
+# Local setup
+settings.json
 docextract-venv

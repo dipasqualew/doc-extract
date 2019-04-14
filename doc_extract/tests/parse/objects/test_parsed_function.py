@@ -4,7 +4,7 @@ module: doc_extract.parse.objects
 """
 import ast
 import pytest
-from doc_extract.tests.mixins import repr_should_be_defined, str_should_be_defined
+from doc_extract.tests.th.mixins import repr_should_be_defined, str_should_be_defined
 from doc_extract.tests.nodes import FUNCTION_NODES
 from doc_extract.parse.objects import ParsedFunction
 

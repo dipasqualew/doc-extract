@@ -2,7 +2,7 @@
 Tests the generic module
 module: doc_extract.generic
 """
-from doc_extract.tests.mixins import repr_should_be_defined, str_should_be_defined
+from doc_extract.tests.th.mixins import repr_should_be_defined, str_should_be_defined
 from doc_extract.generic import DocExtractAbstractClass
 
 

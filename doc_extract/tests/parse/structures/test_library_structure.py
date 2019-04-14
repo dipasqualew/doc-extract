@@ -6,7 +6,12 @@ from unittest.mock import patch
 import pytest
 from doc_extract.parse.objects import ParsedModule, ParsedClass, ParsedFunction
 from doc_extract.parse.structures import CodeStructure, LibraryStructure, ModuleStructure
-from doc_extract.tests.mixins import RecursiveTempDirectory, TempDirectory, repr_should_be_defined, str_should_be_defined, create_node
+from doc_extract.tests.th.files import RecursiveTempDirectory, TempDirectory
+from doc_extract.tests.th.mixins import (
+    repr_should_be_defined,
+    str_should_be_defined,
+    create_node,
+)
 from doc_extract.tests.nodes import (
     create_module_node,
     create_class_node,
