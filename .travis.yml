@@ -1,8 +1,4 @@
 language: python
-os:
- - windows
- - linux
- - osx
 python:
   - "3.6"
 install:

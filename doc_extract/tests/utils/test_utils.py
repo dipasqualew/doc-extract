@@ -2,7 +2,6 @@
 Tests the utils functions
 module: doc_extract.utils
 """
-import os
 import pytest
 from doc_extract.tests.th.os import _get_os_specific_paths
 from doc_extract.tests.th.files import TempDirectory

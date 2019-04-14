@@ -1,6 +1,7 @@
 """
 Fabfile
 """
+from os.path import sep
 from fabric.api import local
 from fabric.colors import cyan
 
@@ -28,7 +29,8 @@ def run_bandit():
     Run bandit
     """
     _print_block("Executing bandit")
-    local("bandit -r doc_extract -x doc_extract/tests")
+
+    local("bandit -r doc_extract -x doc_extract{sep}tests".format(sep=sep))
 
 def run_pylint():
     """
