@@ -1,7 +1,7 @@
 Fabric3==1.14.post1
 bandit==1.6.2
 codecov==2.1.9
-coverage==4.5.2
+coverage==5.3
 mkdocs==1.1.2
 pylint==2.6.0
 pytest==6.1.0
