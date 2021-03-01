@@ -3,5 +3,5 @@ bandit==1.7.0
 codecov==2.1.11
 coverage==5.5
 mkdocs==1.1.2
-pylint==2.7.1
+pylint==2.7.2
 pytest==6.2.2
